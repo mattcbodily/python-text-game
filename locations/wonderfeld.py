@@ -1,6 +1,6 @@
 wonderfeld_monsters = (
-    {'Name': 'Goblin', 'Health': 5, 'Attack': 2, 'Defense': 1},
-    {'Name': 'Warthog', 'Health': 3, 'Attack': 3, 'Defense': 1}
+    {'monster': 'Goblin', 'health': 5, 'attack': 2, 'defense': 1, 'experience': 3, 'gold_max': 5},
+    {'monster': 'Warthog', 'health': 3, 'attack': 3, 'defense': 1, 'experience': 2, 'gold_max': 3}
 )
 
 def wonderfeld_shop(player, play_fn):

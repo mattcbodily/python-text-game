@@ -1,3 +1,4 @@
+import random
 import locations.wonderfeld
 
 class Hero:
@@ -22,7 +23,7 @@ def base_game_play(player):
     ans = input('Select an option: ')
 
     if ans == '1':
-        print('Fight logic in progress')
+        start_fight(player)
     elif ans == '2':
         shop_logic(player)
     elif ans == '3':
@@ -38,6 +39,40 @@ def base_game_play(player):
         print('Here is your inventory')
         print('Gold:', player.gold)
         print('Inventory:', player.inventory)
+
+def fight_logic(player, monster):
+    print('What would you like to do?')
+    print('1: Attack')
+    print('2: Use Item')
+    print('3: Run Away')
+    ans = input('Select an option: ')
+
+    if ans == '1':
+        monster["health"] -= player.attack
+
+        if monster["health"] <= 0:
+            print('You defeated the', monster["monster"])
+            print('You gained', monster["experience"], 'experience')
+            gold = random.randint(0, monster["gold_max"])
+            print('You found', gold, 'gold!')
+
+            player.experience += monster["experience"]
+            player.gold += gold
+            base_game_play(player)
+        else:
+            fight_logic(player, monster)
+    elif ans == '2':
+        print('Inventory logic in progress')
+    elif ans == '3':
+        print('You ran away!')
+        base_game_play(player)
+
+def start_fight(player):
+    if player.location == 'Wonderfeld':
+        monster = random.choice(locations.wonderfeld.wonderfeld_monsters)
+    
+    print('You come across a', monster["monster"])
+    fight_logic(player, monster)
 
 def shop_logic(player):
     if player.location == 'Wonderfeld':
