@@ -1,6 +1,9 @@
+import locations.wonderfeld
+
 class Hero:
     def __init__(self, name):
         self.name = name
+        self.location = 'Wonderfeld'
         self.level = 1
         self.experience = 0
         self.health = 10
@@ -10,7 +13,6 @@ class Hero:
         self.inventory = []
 
 def base_game_play(player):
-    print('You start your journey in the town of Wonderfeld. It is a small town located by a large forest.')
     print('What would you like to do?')
     print('1: Hunt monsters in the forest')
     print('2: Visit the town shop')
@@ -22,7 +24,7 @@ def base_game_play(player):
     if ans == '1':
         print('Fight logic in progress')
     elif ans == '2':
-        print('Shop logic in progress')
+        shop_logic(player)
     elif ans == '3':
         print('Travel logic in progress')
     elif ans == '4':
@@ -36,7 +38,10 @@ def base_game_play(player):
         print('Here is your inventory')
         print('Gold:', player.gold)
         print('Inventory:', player.inventory)
-        
+
+def shop_logic(player):
+    if player.location == 'Wonderfeld':
+        locations.wonderfeld.wonderfeld_shop(player, base_game_play)  
 
 print('Welcome adventurer!')
 name = input('What is your name? ')
@@ -50,5 +55,5 @@ if name:
     print('Attack:', player.attack)
     print('Defense:', player.defense)
     print('Gold:', player.gold)
+    print('You start your journey in the town of Wonderfeld. It is a small town located by a large forest.')
     base_game_play(player)
-
